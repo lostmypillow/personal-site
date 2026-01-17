@@ -1,3 +1,3 @@
 # My Personal Site
 
-made in Vite and React
+made in Vite and Vue

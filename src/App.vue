@@ -1,74 +1,139 @@
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { RouterView } from 'vue-router'
-import MainLayout from './layouts/MainLayout.vue'
-
-const fontsLoaded = ref(false)
-
-onMounted(async () => {
-  await document.fonts.ready
-  await new Promise(r => setTimeout(r, 50))
-  fontsLoaded.value = true
-})
+<!--App.vue-->
+<script lang="ts" setup>
+import ToolBar from "./components/ToolBar.vue";
+import ProjectSection from "./components/ProjectSection.vue";
 </script>
 
 <template>
-  <div class="relative min-h-screen overflow-hidden">
-    <MainLayout>
-      <!-- Route transition -->
-      <RouterView v-slot="{ Component }">
-        <Transition
-            mode="out-in"
-            enter-active-class="transition-all duration-700 ease-out"
-            leave-active-class="transition-all duration-700 ease-out"
-            enter-from-class="opacity-0 blur-md"
-            enter-to-class="opacity-100 blur-0"
-            leave-from-class="opacity-100 blur-md"
-            leave-to-class="opacity-0 blur-md"
-        >
-          <component :is="Component" />
-        </Transition>
-      </RouterView>
-    </MainLayout>
+  <div class="app-wrapper">
+    <main class="layout-main">
+      <ToolBar/>
+      <div class="content-container">
+        <div class="main-column">
+          <div class="skills-container">
+            <h1 class="main-title">我會...</h1>
 
-    <!-- Overlay blur while waiting for fonts -->
-    <Transition
-        enter-active-class="transition-all duration-700 ease-out"
-        leave-active-class="transition-all duration-700 ease-out"
-        enter-from-class="opacity-100 backdrop-blur-md"
-        enter-to-class="opacity-0 backdrop-blur-0"
-        leave-from-class="opacity-100 backdrop-blur-md"
-        leave-to-class="opacity-0 backdrop-blur-0"
-    >
-      <div
-          v-if="!fontsLoaded"
-          class="absolute inset-0 flex items-center justify-center bg-white/30 backdrop-blur-md"
-      >
-        <Avatar
-            image="/icon.webp"
-            shape="circle"
-            size="large"
-            class="animate-spin-pulse"
-        />
+            <ul class="skills-list" role="list">
+              <li>
+                <strong class="highlight">前端、後端</strong>(Python、Vue、React)
+              </li>
+
+              <li>
+                <strong class="highlight">資料庫</strong> (MySQL, MSSQL)
+              </li>
+
+              <li>
+                <span class="highlight">服務</span>
+                (Postfix + Dovecot 郵件伺服器、Caddy/Apache/Nginx 反向代理、Nextcloud、FreeIPA LDAP、Keycloak SSO IAM)
+              </li>
+
+              <li>
+                <span class="highlight">伺服器</span> (Ubuntu Server、Fedora Server、Windows Server)
+              </li>
+              <li>
+                <span class="highlight">虛擬機</span> (Proxmox)
+              </li>
+
+            </ul>
+          </div>
+          <ProjectSection/>
+        </div>
       </div>
-    </Transition>
+    </main>
+    <footer class="footer">
+      Made by Johnny with Vue
+    </footer>
   </div>
 </template>
 
 <style scoped>
-@keyframes spin-pulse {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(180deg) scale(1.08);
-  }
-  100% {
-    transform: rotate(360deg) scale(1);
+.app-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+.layout-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.content-container {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  width: 100%;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  color: #262626;
+  font-weight: 300;
+  font-size: 0.875rem;
+}
+
+.main-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1024px;
+  margin-left: 0;
+  margin-right: auto;
+  padding: 0.5rem 2.1rem;
+  line-height: 1.625;
+  font-weight: 300;
+  color: #262626;
+  font-size: 1.125rem;
+}
+
+
+@media (min-width: 768px) {
+  .skills-container {
+    font-size: 1.5rem;
   }
 }
 
-.animate-spin-pulse {
-  animation: spin-pulse 3.5s ease-in-out infinite;
+.main-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #7f1d1d;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .main-title {
+    font-size: 3rem;
+  }
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  list-style: none;
+  padding: 0;
+}
+
+.skills-list li {
+  margin-bottom: 0.5rem;
+}
+
+.highlight {
+  font-weight: 600;
 }
 </style>

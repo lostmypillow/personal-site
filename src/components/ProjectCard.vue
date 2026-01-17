@@ -1,92 +1,96 @@
-<script setup lang="ts">
-import AkarIconsVueFill from "~icons/akar-icons/vue-fill";
-import AkarIconsPythonFill from "~icons/akar-icons/python-fill";
-import AkarIconsNextjsFill from '~icons/akar-icons/nextjs-fill';
-import AkarIconsReactFill from '~icons/akar-icons/react-fill';
-import AkarIconsDjangoFill from '~icons/akar-icons/django-fill';
-import AkarIconsJavascriptFill from '~icons/akar-icons/javascript-fill';
+<script lang="ts" setup>
 defineProps({
-  title: {
-    type: String,
-    default: "Default Title",
-  },
-  subtitle: {
-    type: String,
-    default: "Default Subtitle",
-  },
-  content: {
-    type: String,
-    default: "Default Content",
-  },
-  showDemo: {
-    type: Boolean,
-  },
-  demoLink: {
-    type: String,
-    default: "https://chodansbawige.com",
-  },
-  showGithub: {
-    type: Boolean,
-  },
-  githubLink: {
-    type: String,
-    default: "https://github.com",
-  },
-  techStack: {
-    type: Array,
-    default: [],
-  },
+  title: {type: String, default: "Default Title"},
+  subtitle: {type: String, default: "Default Subtitle"},
+  content: {type: String, default: "Default Content"},
+  showDemo: {type: Boolean},
+  demoLink: {type: String, default: "https://example.com"},
+  showGithub: {type: Boolean},
+  githubLink: {type: String, default: "https://github.com"},
+  techStack: {type: Array as () => string[], default: () => []},
 });
 </script>
+
 <template>
-  <Card style="width: 25rem; overflow: hidden">
+  <Card class="project-card">
     <template #title>{{ title }}</template>
     <template #subtitle>{{ subtitle }}</template>
-    <template #content>
-      <div v-if="techStack.length > 0" class="flex flex-row gap-4 my-2">
 
-        <Chip v-for="tech in techStack" :label="tech">
-          <template #icon>
-            <AkarIconsVueFill v-if="tech == 'Vue' || tech == 'Nuxt'" />
-            <AkarIconsPythonFill v-if="tech == 'FastAPI' || tech=='Qt6' || tech=='PySide6'" />
-            <AkarIconsNextjsFill v-if="tech == 'NextJS'" />
-            <AkarIconsReactFill v-if="tech== 'React'" />
-            <AkarIconsDjangoFill v-if="tech == 'Django'" />
-            <AkarIconsJavascriptFill v-if="tech == 'JavaScript'" />
-          </template>
+    <template #content>
+      <div v-if="techStack.length > 0" class="tech-stack">
+        <Chip v-for="tech in techStack" :key="tech" :label="tech" class="tech-chip">
+
         </Chip>
       </div>
 
-
-      <div class="m-0" v-html="content"></div>
+      <div class="card-description" v-html="content"></div>
     </template>
+
     <template #footer>
-      <div class="flex gap-4 mt-1">
+      <div class="card-actions">
         <Button
-          v-if="showGithub"
-          rounded
-          as="a"
-          :href="githubLink"
-          target="_blank"
-          rel="noopener"
-          icon="pi pi-github"
-          label="GitHub"
-          severity="secondary"
-          outlined
-          class="w-full"
+            v-if="showGithub"
+            :href="githubLink"
+            as="a"
+            class="action-button"
+            icon="pi pi-github"
+            label="GitHub"
+            outlined
+            rel="noopener"
+            rounded
+            severity="secondary"
+            target="_blank"
         />
         <Button
-          v-if="showDemo"
-          rounded
-          icon="pi pi-external-link"
-          label="Demo"
-          class="w-full"
-          as="a"
-          :href="demoLink"
-          target="_blank"
-          rel="noopener"
+            v-if="showDemo"
+            :href="demoLink"
+            as="a"
+            class="action-button"
+            icon="pi pi-external-link"
+            label="Demo"
+            rel="noopener"
+            rounded
+            target="_blank"
         />
       </div>
     </template>
   </Card>
 </template>
+
+<style scoped>
+.project-card {
+  width: 25rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-stack {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-description {
+  margin: 0;
+}
+
+.card-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.action-button {
+  width: 100%;
+}
+
+
+.tech-stack svg {
+  margin-right: 0.25rem;
+  vertical-align: middle;
+}
+</style>

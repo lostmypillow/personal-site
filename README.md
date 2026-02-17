@@ -1,3 +1,3 @@
 # My Personal Site
 
-made in Vite and Vue
+made in Vite, Vue and Astro

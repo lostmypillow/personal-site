@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <Card class="project-card">
+  <div class="project-card">
     <template #title>{{ title }}</template>
     <template #subtitle>{{ subtitle }}</template>
 
@@ -54,7 +54,7 @@ defineProps({
         />
       </div>
     </template>
-  </Card>
+  </div>
 </template>
 
 <style scoped>

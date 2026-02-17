@@ -27,9 +27,7 @@ const openLink = (url: string) => {
           class="nav-button btn-primary"
           @click="saveAs('/Resume - ZH.pdf', '林家民-履歷.pdf')"
       >
-          <span class="material-symbols-outlined">
-download
-</span>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
         下載履歷
       </button>
 
@@ -37,10 +35,8 @@ download
           class="nav-button btn-primary"
           @click="openLink('https://github.com/lostmypillow')"
       >
-          <span class="material-symbols-outlined">
-open_in_new
-</span>
-        參觀我的GitHub
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/></svg>
+        GitHub
       </button>
     </nav>
   </header>
@@ -49,13 +45,6 @@ open_in_new
 </template>
 
 <style scoped>
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
-}
-
 .custom-toolbar {
   position: sticky;
   top: 1rem;
@@ -86,7 +75,6 @@ open_in_new
   height: 3rem;
 }
 
-/* Avatar & Title */
 .toolbar-start {
   display: flex;
   flex-direction: row;
@@ -116,7 +104,7 @@ open_in_new
 
 .toolbar-end {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 
   align-items: center;
   gap: 0.5rem;

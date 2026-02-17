@@ -1,8 +1,12 @@
 :root {
-font-family: "Noto Sans TC", sans-serif !important ;
+font-family: system-ui, sans-serif !important ;
     background-color: #fecaca;
 }
-
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 html, body {
   margin: 0;
   padding: 0;

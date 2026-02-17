@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import {saveAs} from "file-saver";
+
+import pkg from 'file-saver';
+const {saveAs} = pkg;
 const openLink = (url: string) => {
   window.open(url, '_blank', 'noopener');
 };

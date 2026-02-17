@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    Made by Johnny with Vue
+    Made by Johnny with Vue & Astro
   </footer>
 </template>
 
